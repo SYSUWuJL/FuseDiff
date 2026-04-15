@@ -1,0 +1,37 @@
+model:
+  checkpoint: pretrained_model/pretrained_FuseDiff.pt
+  target_1: realworldcases/GSK3b_JNK3/GSK3b_pocket_10A.pdb
+  target_2: realworldcases/GSK3b_JNK3/JNK3_pocket_10A.pdb
+  ligand: None
+  frag: None
+  gen_mode: denovo # [denovo, frag_cond, frag_diff]
+  logp: 2.00
+  tpsa: 100
+  sa: 1.00
+  qed: 0.80
+  aff: 12.00
+
+bond_predictor: pretrained_model/bond_trained.pt
+
+sample:
+  seed: 2023
+  batch_size: 5
+  num_mols: 1
+  save_traj_prob: 0.02
+  sample: True
+  sample_method: priori
+  mode: given_pockets # given_pockets/BindingNetv2_validset/dualdiff_testset
+  add_edge: None
+  gui_strength: 3.0
+  guidance:
+    - uncertainty
+    - 1.e-4
+
+data:
+  name: dual
+  path: ./data/BindingNetV2_dualdata_high
+  split: ./data/BindingNetV2_dualdata_high_split.pt
+  transform:
+    ligand_atom_mode: aromatic # [basic, aromatic, full]
+    random_rot: False
+    sample: False

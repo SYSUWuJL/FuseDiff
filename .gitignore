@@ -1,0 +1,3 @@
+.vscode/
+*.lmdb
+pretrained_model/

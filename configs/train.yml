@@ -1,0 +1,81 @@
+model:
+  name: FuseDiff
+  node_dim: 256
+  edge_dim: 64
+  class_dim: 4
+  class_emb_dim: 10
+  # edge_feat_dim: 4
+  node_indicator: True
+  bond_len_loss: True
+  center_pos_mode: protein
+  knn: 32
+  cutoff_mode: knn
+  train_mode: ori # [ori, no_bond, no_lab, no_both]
+  denoiser:
+    backbone: EGNN
+    num_blocks: 9
+    cutoff: 15
+    use_gate: True
+  diff:
+    num_timesteps: 1000
+    time_dim: 10
+    categorical_space: discrete
+    diff_pos:
+      beta_schedule: advance
+      scale_start: 0.9999
+      scale_end: 0.0001
+      width: 3
+    diff_atom: 
+      init_prob: tomask
+      beta_schedule: advance
+      scale_start: 0.9999
+      scale_end: 0.0001
+      width: 3
+    diff_bond:
+      init_prob: absorb
+      beta_schedule: segment
+      time_segment: [600, 400]
+      segment_diff: 
+        - scale_start: 0.9999
+          scale_end: 0.001
+          width: 3
+        - scale_start: 0.001
+          scale_end: 0.0001
+          width: 2
+
+train:
+  seed: 2023
+  batch_size: 4
+  num_workers: 8
+  threshold: 0.1
+  pin_memory: True
+  max_iters: 500000
+  val_freq: 2000
+  train_report_iter: 100
+  pos_noise_std: 0.05
+  max_grad_norm: 50.0
+  use_amp: True
+  resume: False
+  resume_ckpt: None
+  prev_model: False
+  prev_ckpt: None
+  optimizer:
+    type: adamw
+    lr: 1.e-4
+    weight_decay: 1.e-4
+    beta1: 0.99
+    beta2: 0.999
+  scheduler:
+    type: plateau
+    factor: 0.8
+    patience: 10
+    min_lr: 1.e-8
+
+data:
+  name: dual
+  path: ./data/BindingNetV2_dualdata_high
+  split: ./data/BindingNetV2_dualdata_high_split.pt
+  transform:
+    ligand_atom_mode: aromatic # [basic, aromatic, full]
+    random_rot: False
+    sample: False
