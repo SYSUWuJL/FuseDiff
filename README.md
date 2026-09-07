@@ -1,10 +1,8 @@
 # FuseDiff: Symmetry-Preserving Joint Diffusion for Dual-Target Structure-Based Drug Design
 
-This repository is the official implementation of **"FuseDiff: Symmetry-Preserving Joint Diffusion for Dual-Target Structure-Based Drug Design"**.
+FuseDiff has been accepted by the **32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD 2026)**.
 
-## Paper
-
-- arXiv: [2603.05567](https://arxiv.org/abs/2603.05567)
+[Paper](https://dl.acm.org/doi/10.1145/3770855.3819050)
 
 ## Overview
 
@@ -107,15 +105,16 @@ python scripts/sample.py --config configs/sample.yml --outdir logs_sample/
 
 ## Citation
 
+If you find this work useful, please cite:
+
 ```bibtex
-@misc{wu2026fusediff,
-  title={FuseDiff: Symmetry-Preserving Joint Diffusion for Dual-Target Structure-Based Drug Design},
-  author={Jianliang Wu and Anjie Qiao and Zhen Wang and Zhewei Wei and Sheng Chen},
-  year={2026},
-  eprint={2603.05567},
-  archivePrefix={arXiv},
-  primaryClass={cs.LG},
-  url={https://arxiv.org/abs/2603.05567},
+@inproceedings{wu2026fusediff,
+author = {Wu, Jianliang and Qiao, Anjie and Wang, Zhen and Wei, Zhewei and Chen, Sheng},
+title = {FuseDiff: Symmetry-Preserving Joint Diffusion for Dual-Target Structure-Based Drug Design},
+booktitle = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2},
+year = {2026},
+pages = {12432–12443},
+doi = {10.1145/3770855.3819050}
 }
 ```
 
